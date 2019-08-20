@@ -1,0 +1,114 @@
+<html>
+<head>
+  <title>Catalogo</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="js/funciones.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/select2.css">
+	<script src="js/select2.js"></script>
+	<link rel="Shortcut Icon" type="image/x-icon" href="img/logo-libro.png" />
+</head>
+<body>
+    <div data-include="menu"></div>
+<br>
+    
+  <section class="container">
+
+    <div class="row">
+      <br><br>
+      <div class="col-sm-12">
+          <ul class="nav nav-tabs">
+            <li><a href="inicio.html">Todo</a></li>
+            <li><a href="papeleria.html">Papeleria</a></li>
+            <li><a href="estudiantes.html">Estudiantes</a></li>
+            <li><a href="oficina.html">Oficina</a></li>
+          </ul>
+      </div>
+          
+          
+        <div class="tab-content">
+          <section id="store">
+              <div class="container">
+                <div class="row" id="rowForProducts">
+                    
+                  </div><!--Fin div de la rox-->
+                </div> <!--fuin div clase container--->
+            </section>
+      </div> <!--Fin de la Col-sm-12--->
+    </div> <!--Fin de la row-->
+  </section>
+  
+
+
+
+  <script type="text/javascript">
+   var baseURL = 'http://localhost/pruebaRuk/AppMovil-WebServices/';
+   var mediaURL = 'http://localhost/pruebaRuk/archivos/';
+   var userData;
+
+	  window.onload = comprobar();
+    window.onload = incluirHTMLs();
+    window.load = loadProducts();
+
+    function comprobar(){
+		$.ajax({
+			type: "POST",
+			url: baseURL + "sessionCheck.php",
+			data: {categoria : 2},
+			contentType: "application/json; charset=utf-8",
+			dataType: "json",
+			success: function(result){
+				if(result.usuario == ""){
+					window.location.href = 'login.html';
+				}else{
+					userData = result;
+				}
+        console.log("userdata_ userType: "+userData.userType);
+			}
+		}); //Fin del Ajax para comprobar sesion */
+    } //Fin del metodo Comprobar()
+    
+
+    function incluirHTMLs(){
+      $('div[data-include]').each(function() {
+        $(this).load('views/' + $(this).attr('data-include') + '.html').trigger('create');
+      });
+    }
+
+    function loadProducts(){
+      $.ajax({
+            type: "POST",
+            url: baseURL + "getProductList.php",
+            data: {categoria: 2},
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function(result){
+              if(result != null){
+                var toIterateHTML = document.getElementById('rowForProducts');
+                for (var i = 0; i < result.length; i++){
+                  toIterateHTML.innerHTML += 
+                    '<div class="col-xs-12 col-sm-6 col-md-3">'+
+                    '<div class="thumbnail">'+
+                    '<img width="50%" height="50%" src="'+ mediaURL+result[i].imgName+'"></a>'+
+                    '<div class="caption">'+
+                    '<h3>'+result[i].nameProd+'</h3>'+
+                    '<p>'+result[i].descriptionProd+'</p>'+
+                    '<p>'+result[i].priceProd+'</p>'+
+                    '<p class="text-center">'+
+                    '<a href="verdetalle.html?id_producto='+result[i].idProd+'" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>&nbsp; Detalles</a>&nbsp;&nbsp'+
+                    '<button value="A Carrito" class="btn btn-success btn-sm botonCarrito"><i class="fa fa-shopping-cart"></i>&nbsp; Añadir</button>'+
+                    '</p></div></div></div>'; //Cierra divs thumbnails, caption, y columna
+                    
+                }//Fin del For
+                
+              }
+              
+            }
+    });
+    }//Fin loadProducts
+
+  </script>
+</body>
+</html>

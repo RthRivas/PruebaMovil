@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!--el <title>Titulo en la pestaña</title> incluirlo en cada archivo a incluir (donde es necesario)-->
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/alertify.min.css">
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="js/funciones.js"></script>
+	<script src="js/alertify.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/select2.css">
+	<script src="js/select2.js"></script>
+	<link rel="Shortcut Icon" type="image/x-icon" href="img/logo-libro.png" />
+</head>
+<body>
+
+	<div id="includedContent" template-include="menu"></div>
+
+
+<script>
+	$('div[template-include]').each(function() {
+    $(this).load('views/' + $(this).attr('template-include') + '.html').trigger('create');
+});
+ </script> 
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<link rel="Shortcut Icon" type="image/x-icon" href="img/logo-libro.png" />
+</head>
+<body>
+ola
+
+<script type="text/javascript">
+	var baseURL = 'http://localhost/pruebaRuk/AppMovil-WebServices/';
+	var userData;
+
+	window.onload = comprobar();
+
+    function comprobar(){
+		$.ajax({
+			type: "POST",
+			url: baseURL + "sessionCheck.php",
+			data: "{}",
+			contentType: "application/json; charset=utf-8",
+			dataType: "json",
+			success: function(result){
+				if(result.usuario == ""){
+					window.location.href = 'login.html';
+				}else{
+					userData = result;
+					window.location.href = 'inicio.html';
+				}
+			}
+		}); //Fin del Ajax para comprobar sesion */
+      }
+
+	
+		
+ </script> 
+</body>
+</html>
