@@ -44,18 +44,15 @@
 
 
   <script type="text/javascript">
-   var baseURL = 'http://localhost/pruebaRuk/AppMovil-WebServices/';
-   var mediaURL = 'http://localhost/pruebaRuk/archivos/';
+   var baseURL = 'http://localhost/pruebaRuk/';
    var userData;
 
 	  window.onload = comprobar();
-    window.onload = incluirHTMLs();
-    window.load = loadProducts();
 
     function comprobar(){
 		$.ajax({
 			type: "POST",
-			url: baseURL + "sessionCheck.php",
+			url: baseURL + "AppMovil-WebServices/sessionCheck.php",
 			data: "{}",
 			contentType: "application/json; charset=utf-8",
 			dataType: "json",
@@ -64,6 +61,8 @@
 					window.location.href = 'login.html';
 				}else{
 					userData = result;
+          loadProducts();
+          incluirHTMLs();
 				}
         console.log("userdata_ userType: "+userData.userType);
 			}
@@ -80,7 +79,7 @@
     function loadProducts(){
       $.ajax({
             type: "POST",
-            url: baseURL + "getProductList.php",
+            url: baseURL + "AppMovil-WebServices/getProductList.php",
             data: {categoria : 4},
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -91,13 +90,13 @@
                   toIterateHTML.innerHTML += 
                     '<div class="col-xs-12 col-sm-6 col-md-3">'+
                     '<div class="thumbnail">'+
-                    '<img width="50%" height="50%" src="'+ mediaURL+result[i].imgName+'"></a>'+
+                    '<img width="50%" height="50%" src="'+ baseURL+'archivos/'+result[i].imgName+'"></a>'+
                     '<div class="caption">'+
                     '<h3>'+result[i].nameProd+'</h3>'+
                     '<p>'+result[i].descriptionProd+'</p>'+
-                    '<p>'+result[i].priceProd+'</p>'+
+                    '<p>Precio (U)$'+result[i].priceProd+'</p>'+
                     '<p class="text-center">'+
-                    '<a href="verdetalle.html?id_producto='+result[i].idProd+'" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>&nbsp; Detalles</a>&nbsp;&nbsp'+
+                    '<a href="verdetalle.html?prod='+result[i].idProd+'" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>&nbsp; Detalles</a>&nbsp;&nbsp'+
                     '<button value="A Carrito" class="btn btn-success btn-sm botonCarrito"><i class="fa fa-shopping-cart"></i>&nbsp; Añadir</button>'+
                     '</p></div></div></div>'; //Cierra divs thumbnails, caption, y columna
                     

@@ -1,0 +1,72 @@
+<html>
+<head>
+  <title>Iniciar Sesion</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="js/funciones.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/select2.css">
+	<script src="js/select2.js"></script>
+	<link rel="Shortcut Icon" type="image/x-icon" href="img/logo-libro.png" />
+</head>
+<body>
+    <div data-include="menu"></div>
+<br>
+	<div class="container">
+    <div class="w-100 p-4"></div>
+		<div class="row">
+			<div class="col-sm-4">
+				<div class="panel panel-primary">
+					<div class="panel panel-heading">Sistema de ventas y almacen</div>
+					<div class="panel panel-body">
+						
+							<img id="logoIMG" src=""  width="80%">
+						
+						<form id="frmLogin" method="POST">
+							<label>Usuario</label>
+							<input type="text" class="form-control input-sm" name="usuario" id="usuario" require>
+							<label>Password</label>
+							<input type="password" name="password" id="password" class="form-control input-sm" require>
+							<p></p>
+							<button class="btn btn-primary btn-sm" id="entrarSistema" value="login" onclick="login()">Entrar</button>
+							<a href="registro.html" class="btn btn-danger btn-sm">Registrar</a>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-4"></div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+	var baseURL = 'http://localhost/pruebaRuk/';
+	$(document).ready(function(){
+		document.getElementById('logoIMG').setAttribute("src", baseURL+"img/logo-libro.png");
+	});
+
+	function login(){
+		vacios=validarFormVacio('frmLogin');
+		if(vacios > 0){
+			alert("Debes llenar todos los campos!!");
+			return false;
+		}
+
+		datos=$('#frmLogin').serialize();
+		$.ajax({
+			type:"POST",
+			data:datos,
+			url: baseURL + "AppMovil-WebServices/login.php",
+			success:function(r){
+				alert (r);
+				if(r==1){
+					window.location.href = 'index.html';
+				}else{
+					alert("No se pudo acceder "+r);
+				}
+			}
+		});
+	}
+</script>
+</body>
+</html>

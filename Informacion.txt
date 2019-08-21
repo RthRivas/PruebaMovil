@@ -1,0 +1,14 @@
+Para trabajarse con Apache Cordova, es necesario que TODO se haga solo con html y Javascript,
+ya que no hay reconocimiento para archivos PHP.
+
+//*La carpeta "AppMovil-WebServices" debe ponerse en la carpeta raiz de la Apllicaicon (donde esta el proyecto web)*// 
+
+//** En cada uno de los archivos HTML se encuentra una variable "baseURL" en el javascript  esta es la URL que apunta hacia donde esta el proyecto 
+(en general, ya que se usará esta misma direccion para acceder tanto a los archivos de la carpeta "AppMovil-WebServices" como a la carpeta "archivos"
+donde se encuentran las imagenes de los productos.
+
+//las obtenciones de los datos y consultas se realizan mediante pedticiones httpResponse.
+ya sea por el metodo $.ajax(); o por el metodo $.post(); (Usando Jquery).
+
+//los script del webServices realizan los procesos y retornan un json con la informacion que se recibe al usar el metodo $.ajax o $.post
+ y con la respuesta, hacer lo que se quiere hacer con javascript y html.

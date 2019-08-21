@@ -8,7 +8,7 @@
 ola
 
 <script type="text/javascript">
-	var baseURL = 'http://localhost/pruebaRuk/AppMovil-WebServices/';
+	var baseURL = 'http://localhost/pruebaRuk/';
 	var userData;
 
 	window.onload = comprobar();
@@ -16,7 +16,7 @@ ola
     function comprobar(){
 		$.ajax({
 			type: "POST",
-			url: baseURL + "sessionCheck.php",
+			url: baseURL + "AppMovil-WebServices/sessionCheck.php",
 			data: "{}",
 			contentType: "application/json; charset=utf-8",
 			dataType: "json",

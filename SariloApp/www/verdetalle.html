@@ -1,0 +1,60 @@
+<html>
+    <head>
+    <title>Detalles de Producto</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/funciones.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/select2.css">
+    <script src="js/select2.js"></script>
+    <link rel="Shortcut Icon" type="image/x-icon" href="img/logo-libro.png" />
+    </head>
+    <body>
+
+    <section id="infoproduct">
+
+        <div class="container">
+            <div class="row">
+                <div class="page-header">
+                    <h1>Libreria SARILO</small></h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6" id="areaInfo">
+                    <h3 class="text-center">Información de producto</h3>
+                    <br><br>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+<script type="text/javascript">
+    baseURL = "http://localhost/pruebaRuk/";
+    window.load = loadProdDetails();
+    function loadProdDetails(){
+        let params = new URLSearchParams(location.search);
+        var id = params.get('prod');
+        $.post(baseURL+'AppMovil-WebServices/getProdDetails.php', {idProd:id},
+        function(result){
+            var info = 
+                '<h4><strong>Nombre: </strong>'+result.nameProd+'</h4>'+
+                '<h4><strong>Disponibles: </strong>'+result.stockProd+'</h4>'+
+                '<h4><strong>Descripcion: </strong>'+result.descriptionProd+'</h4>'+
+                '<h4><strong>Precio: </strong>'+result.priceProd+'</h4>';
+            
+        info += '<div class="col-xs-12 col-sm-6"><br><br><br>'+
+        '<img width="80%" src="'+baseURL+'archivos/'+result.imgName+'"></a></div>'+
+        '<br><br><br><div class="col-xs-12 text-center">'+
+        '<a href="inicio.html" class="btn btn-lg btn-primary"><i class="fa fa-mail-reply"></i>Regresar a la tienda</a>'+
+        ' <button value="'+result.idProd+'" class="btn btn-lg btn-success botonCarrito"><i class="fa fa-shopping-cart"></i> Añadir al carrito</button>';
+
+
+            $('#areaInfo').html(info);
+        })
+
+    }
+</script>
+</body>
+</html>
