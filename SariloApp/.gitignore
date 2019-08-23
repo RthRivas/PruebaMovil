@@ -1,0 +1,5 @@
+# Dependencia de Directorios
+node_modules/
+
+#Carpetas de Plataformas de Android que usa Cordova
+platforms/

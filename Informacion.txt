@@ -3,12 +3,46 @@ ya que no hay reconocimiento para archivos PHP.
 
 //*La carpeta "AppMovil-WebServices" debe ponerse en la carpeta raiz de la Apllicaicon (donde esta el proyecto web)*// 
 
-//** En cada uno de los archivos HTML se encuentra una variable "baseURL" en el javascript  esta es la URL que apunta hacia donde esta el proyecto 
-(en general, ya que se usará esta misma direccion para acceder tanto a los archivos de la carpeta "AppMovil-WebServices" como a la carpeta "archivos"
-donde se encuentran las imagenes de los productos.
+//** Cambiar la URL del servidor web en archivo js/baseURL.js
 
 //las obtenciones de los datos y consultas se realizan mediante pedticiones httpResponse.
 ya sea por el metodo $.ajax(); o por el metodo $.post(); (Usando Jquery).
 
 //los script del webServices realizan los procesos y retornan un json con la informacion que se recibe al usar el metodo $.ajax o $.post
  y con la respuesta, hacer lo que se quiere hacer con javascript y html.
+
+
+
+
+
+///----------------------------------------///
+		Guia de APACHE CORDOVA
+https://cordova.apache.org/docs/es/latest/guide/cli/index.html
+
+*Instalar la CLI de Apache Cordova
+	Mi Configuracion: (Variables de Entorno(Sistema))
+	ANDROID_SDK_ROOT: C:\Users\Mauricio Cruz\AppData\Local\Android\Sdk
+	JAVA_HOME: C:\Program Files\Java\jdk1.8.0_211
+
+* Se debe de agregar la platform de android independientemente en cada maquina, por lo que esta carpeta platform, se agregará al .gitignore, en mi version local, he agregado la platform de android 8 con :
+	cordova platform add android@8
+
+al no especificar la version de android (@8, @5.1 etc) se agregará la ultima version de android que se encuentre en la carpeta platform del SDK de android
+
+// Para generar el Apk, usar comando: cordova build android
+al final deberia aparecer si generó el apk en la ruta (dentro del proyecto):
+
+sarilo-app\SariloApp\platforms\android\app\build\outputs\apk\debug\app-debug.apk
+
+//---- Tambien se puede usar cordova run android para correr la aplicacion directamente en el dispositivo conectado con la depuracion USB activada.
+
+
+
+
+
+
+
+
+
+
+

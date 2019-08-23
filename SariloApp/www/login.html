@@ -6,8 +6,7 @@
 	<script src="js/jquery-3.2.1.min.js"></script>
 	<script src="js/funciones.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="css/select2.css">
-	<script src="js/select2.js"></script>
+	<script src="js/baseURL.js"></script>
 	<link rel="Shortcut Icon" type="image/x-icon" href="img/logo-libro.png" />
 </head>
 <body>
@@ -20,8 +19,9 @@
 				<div class="panel panel-primary">
 					<div class="panel panel-heading">Sistema de ventas y almacen</div>
 					<div class="panel panel-body">
-						
-							<img id="logoIMG" src=""  width="80%">
+						<div class="text-center">
+									<img id="logoIMG" src="">
+						</div>
 						
 						<form id="frmLogin" method="POST">
 							<label>Usuario</label>
@@ -32,20 +32,36 @@
 							<button class="btn btn-primary btn-sm" id="entrarSistema" value="login" onclick="login()">Entrar</button>
 							<a href="registro.html" class="btn btn-danger btn-sm">Registrar</a>
 						</form>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-4"></div>
-		</div>
-	</div>
+					</div> <!--Cierra el body del panel-->
+				</div><!--Cierra Panel-->
+			</div><!--Cierra COlumna 1-->
+		</div> <!--Cierra ROW-->
+	</div> <!---Cierre Container-->
 
 	<script type="text/javascript">
-	var baseURL = 'http://localhost/pruebaRuk/';
-	$(document).ready(function(){
-		document.getElementById('logoIMG').setAttribute("src", baseURL+"img/logo-libro.png");
-	});
+		document.load = comprobar();
 
-	function login(){
+		function comprobar(){
+			$.ajax({
+				type: "POST",
+				url: baseURL + "AppMovil-WebServices/sessionCheck.php",
+				data:"",
+				contentType: "application/json; charset=utf-8",
+				dataType: "json",
+				success: function(result){
+					if(result.usuario != ""){
+						userData = result;
+						window.location.href = 'inicio.html';
+					}
+				}
+			}); //Fin del Ajax para comprobar sesion */
+		} //Fin del metodo Comprobar()
+
+		$(document).ready(function(){
+			document.getElementById('logoIMG').setAttribute("src", baseURL+"img/logo-libro.png");
+		});
+
+		function login(){
 		vacios=validarFormVacio('frmLogin');
 		if(vacios > 0){
 			alert("Debes llenar todos los campos!!");
@@ -53,7 +69,16 @@
 		}
 
 		datos=$('#frmLogin').serialize();
-		$.ajax({
+		$.post(baseURL + "AppMovil-WebServices/login.php", datos, function(r){
+			alert (r);
+			if(r==1){
+				window.location.href = "inicio.html";
+			}else{
+				alert("No se pudo acceder "+r);
+			}
+		});
+
+		/*$.ajax({
 			type:"POST",
 			data:datos,
 			url: baseURL + "AppMovil-WebServices/login.php",
@@ -65,8 +90,8 @@
 					alert("No se pudo acceder "+r);
 				}
 			}
-		});
-	}
+		});*/
+	}//Fin de Funcion Login()
 </script>
 </body>
 </html>

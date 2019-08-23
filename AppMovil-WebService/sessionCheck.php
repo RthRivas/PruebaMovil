@@ -7,6 +7,7 @@
     }else{
         $data['usuario'] = '';
     }
+    sleep(0.5);
     echo json_encode($data); 
 
 ?>
