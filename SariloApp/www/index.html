@@ -1,12 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="UTF-8">
+	<title>Sarilo App</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 	<script src="js/jquery-3.2.1.min.js"></script>
 	<script src="js/baseURL.js"></script>
 	<link rel="Shortcut Icon" type="image/x-icon" href="img/logo-libro.png" />
 </head>
 <body>
-ola
+	<div class="w-100 p-4"></div>
+	<div class="w-100 p-4"></div>
+	<div class="col-8 offset-2">
+	<div class="card border-danger mb-3" id="laCard" style="max-width: 18rem;">
+		<div class="card-header">Sarilo App</div>
+		<div class="card-body text-danger" id="elBodyCard">
+			<h5 class="card-title" id="cardTitle">Conectando con el servidor...</h5>
+			<p class="card-text" id="cardText"></p>
+		</div>
+	</div>
+</div>
 
 <script type="text/javascript">
 	var userData;
@@ -14,6 +27,13 @@ ola
 	window.onload = comprobar();
 
     function comprobar(){
+		$('#laCard').removeClass("border-danger");
+		$('#elBodyCard').removeClass("border-danger");
+		$('#laCard').addClass("border-secondary");
+		$('#elBodyCard').addClass("border-secondary");
+
+		$('#cardTitle').html('Conectando con el Servidor...');
+		$('#cardText').html("");
 		$.ajax({
 			type: "POST",
 			url: baseURL + "AppMovil-WebServices/sessionCheck.php",
@@ -27,6 +47,15 @@ ola
 					userData = result;
 					window.location.href = 'inicio.html';
 				}
+			},
+			error: function(error){
+				$('#laCard').removeClass("border-secondary");
+				$('#elBodyCard').removeClass("border-secondary");
+				$('#laCard').addClass("border-danger");
+				$('#elBodyCard').addClass("border-danger");
+				$('#cardTiTle').html("Algo salió mal...");
+				$('#cardText').html("Ocurrió un problema con la conexion al servidor: "+error+ "<br><br>"+
+				'<button class="btn btn-secondary text-center" onclick="comprobar()">Reintentar</button>');
 			}
 		}); //Fin del Ajax para comprobar sesion */
       }

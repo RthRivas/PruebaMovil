@@ -1,1 +1,1 @@
-var baseURL = "http://localhost/pruebaRuk/";
+var baseURL = "http://localhost/pruebaRuk/"; 
